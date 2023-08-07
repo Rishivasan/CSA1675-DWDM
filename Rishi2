@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void generatePermutations(int a[], int n, int currentIndex) {
+    if (currentIndex == n - 1) {
+        printArray(a, n);
+        return;
+    }
+
+    for (int i = currentIndex; i < n; i++) {
+        int temp = a[currentIndex];
+        a[currentIndex] = a[i];
+        a[i] = temp;
+
+        generatePermutations(a, n, currentIndex + 1);
+
+        temp = a[currentIndex];
+        a[currentIndex] = a[i];
+        a[i] = temp;
+    }
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int a[n];
+    printf("Enter the elements: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    printf("All possible permutations:\n");
+    generatePermutations(a, n, 0);
+
+    return 0;
+}
